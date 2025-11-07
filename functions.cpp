@@ -51,46 +51,41 @@ Studentas<T> ivesk() {
 // Funkcija vienos eilutes skaitymui is failo
 template <typename T>
 Studentas<T> iveskIsFailo(const string &line) {
-    Studentas<T> Laik;
+    Studentas<T> s;
     istringstream in(line);
 
-    in >> Laik.vard >> Laik.pav;
+    string vard, pav;
+    in >> vard >> pav;
+    s.setVard(vard);
+    s.setPav(pav);
+
     T visiSkaiciai;
     string temp;
-    while (in >> temp) { 
+    while (in >> temp) {
         try {
-            size_t pos;
-            int skaicius = stoi(temp, &pos);
-            if (pos != temp.length()) {
-                throw std::invalid_argument("Ne skaicius");
-            }
+            int skaicius = stoi(temp);
             visiSkaiciai.push_back(skaicius);
-        } catch (...) {
-            cout << "Klaida faile: studento \"" << Laik.vard << " " << Laik.pav 
-                 << "\" pazymys \"" << temp << "\" yra netinkamas!" << endl;
-        }
+        } catch (...) {}
     }
 
     if (visiSkaiciai.empty()) {
-        cout << "Klaida: studentas \"" << Laik.vard << " " << Laik.pav 
-             << "\" neturi pazymiu." << endl;
-        Laik.egzas = 0;
-        Laik.rez = 0;
-        Laik.mediana = 0;
-        return Laik;
+        s.setEgzas(0);
+        s.setRez(0);
+        s.setMediana(0);
+        return s;
     }
 
-    Laik.egzas = visiSkaiciai.back();
+    s.setEgzas(visiSkaiciai.back());
     visiSkaiciai.pop_back();
-    Laik.paz = visiSkaiciai;
+    s.setPaz(visiSkaiciai);
 
     int sum = 0;
-    for (int p : Laik.paz) sum += p;
-    float vid = (Laik.paz.empty()) ? 0 : (float)sum / Laik.paz.size();
-    Laik.rez = Laik.egzas * 0.6 + vid * 0.4;
-    Laik.mediana = skaiciuotiMediana(Laik.paz);
+    for (int p : visiSkaiciai) sum += p;
+    float vid = (visiSkaiciai.empty()) ? 0 : (float)sum / visiSkaiciai.size();
+    s.setRez(s.getEgzas() * 0.6f + vid * 0.4f);
+    s.setMediana(skaiciuotiMediana(visiSkaiciai));
 
-    return Laik;
+    return s;
 }
 
 // Funkcija viso failo skaitymui
