@@ -138,37 +138,32 @@ string formatuoti(string s, int plotis) {
 // Funkcija atsitiktinio studento generavimui
 template <typename T>
 Studentas<T> generuokStudenta() {
-    Studentas<T> Laik;
-    cout << "Ivesk varda: "; 
-    getline(cin, Laik.vard);
-    cout << "Ivesk pavarde: "; 
-    getline(cin, Laik.pav);
+    Studentas<T> s;
+    string vard, pav;
+    cout << "Iveskite varda: ";
+    getline(cin, vard);
+    cout << "Iveskite pavarde: ";
+    getline(cin, pav);
+    s.setVard(vard);
+    s.setPav(pav);
 
     int ndKiekis;
-    while (true) {
-        cout << "Kiek namu darbu pazymiu turi studentas? ";
-        string temp;
-        getline(cin, temp);
-        try {
-            ndKiekis = stoi(temp);
-            if (ndKiekis > 0) break;
-            else cout << "Turi buti bent vienas pazymys!\n";
-        } catch (...) {
-            cout << "Klaida: iveskite skaiciu!\n";
-        }
-    }
+    cout << "Kiek namu darbu pazymiu? ";
+    cin >> ndKiekis;
+    cin.ignore();
 
-    Laik.paz.clear();
-    for (int i = 0; i < ndKiekis; i++) {
-        Laik.paz.push_back(rand() % 10 + 1);
-    }
-    Laik.egzas = rand() % 10 + 1;
+    T paz;
+    for (int i = 0; i < ndKiekis; i++)
+        paz.push_back(rand() % 10 + 1);
+    s.setPaz(paz);
+    s.setEgzas(rand() % 10 + 1);
 
-    int sum = 0;
-    for (int p : Laik.paz) sum += p;
-    Laik.rez = Laik.egzas * 0.6f + (float)sum / Laik.paz.size() * 0.4f;
-    Laik.mediana = skaiciuotiMediana(Laik.paz);
-    return Laik;
+    int sum = accumulate(paz.begin(), paz.end(), 0);
+    float rez = s.getEgzas() * 0.6f + (float)sum / paz.size() * 0.4f;
+    s.setRez(rez);
+    s.setMediana(skaiciuotiMediana(paz));
+
+    return s;
 }
 
 // Rusiavimo funkcija
