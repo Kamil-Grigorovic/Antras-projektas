@@ -293,27 +293,32 @@ void rikiuotiIrSukurtGrupe_3(T &visiStudentai, T &vargsiukai, const string &krit
 // Funkcija studentų rezultatų spausdinimui į failą
 template <typename T>
 void spausdintiIFaila(const T &grupe, const string &failoVardas) {
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = chrono::high_resolution_clock::now();
 
-    std::ofstream out(failoVardas);
+    ofstream out(failoVardas);
     if (!out) {
         cout << "Nepavyko sukurti failo: " << failoVardas << endl;
         return;
     }
 
-    out << "|" << formatuoti("Vardas", 14) << "|" << formatuoti(" Pavarde", 15) 
-        << "|" << formatuoti("Vidurkis", 10) << "|" << formatuoti("Mediana", 9) << "|\n";
+    out << "|" << formatuoti("Vardas", 14)
+        << "|" << formatuoti(" Pavarde", 15)
+        << "|" << formatuoti("Vidurkis", 10)
+        << "|" << formatuoti("Mediana", 9) << "|\n";
     out << "-----------------------------------------------------\n";
 
     for (const auto &temp : grupe) {
-        out << "|" << formatuoti(temp.vard, 14) << "|" << formatuoti(temp.pav, 15) 
-            << "|" << formatuoti(SkaiciaiSuKableliu(temp.rez), 10) 
-            << "|" << formatuoti(SkaiciaiSuKableliu(temp.mediana), 9) << "|\n";
+        out << "|" << formatuoti(temp.getVard(), 14)
+            << "|" << formatuoti(temp.getPav(), 15)
+            << "|" << formatuoti(SkaiciaiSuKableliu(temp.getRez()), 10)
+            << "|" << formatuoti(SkaiciaiSuKableliu(temp.getMediana()), 9)
+            << "|\n";
     }
 
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = end - start;
-    cout << "Spausdinimas i faila (" << failoVardas << ") uztruko: " << elapsed.count() << " sekundziu." << endl;
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed = end - start;
+    cout << "Spausdinimas i faila (" << failoVardas << ") uztruko: "
+         << elapsed.count() << " s.\n";
 }
 
 
