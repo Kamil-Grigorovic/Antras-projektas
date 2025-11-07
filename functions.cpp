@@ -182,14 +182,14 @@ void rikiuotiIrSukurtGrupe(const T &visiStudentai, T &vargsiukai, T &galvociai, 
 
     auto comparator = [&](const auto &a, const auto &b) {
         if (kriterijus == "vardas") 
-            return a.vard < b.vard;
+            return a.getVard() < b.getVard();
         if (kriterijus == "pavarde") 
-            return a.pav < b.pav;
+            return a.getPav() < b.getPav();
         if (kriterijus == "vidurkis") 
-            return a.rez < b.rez;
-        if (a.pav == b.pav) 
-            return a.vard < b.vard;
-        return a.pav < b.pav;
+            return a.getRez() < b.getRez();
+        if (a.getPav() == b.getPav()) 
+            return a.getVard() < b.getVard();
+        return a.getVard() < b.getVard();
     };
 
     rikiuoti(temp, comparator);
@@ -198,7 +198,7 @@ void rikiuotiIrSukurtGrupe(const T &visiStudentai, T &vargsiukai, T &galvociai, 
     galvociai.clear();
 
     for (const auto &s : temp) {
-        if (s.rez < 5)
+        if (s.getRez() < 5)
             vargsiukai.push_back(s);
         else
             galvociai.push_back(s);
