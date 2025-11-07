@@ -29,32 +29,43 @@ Kodas skaičiuoja kiekvieno studento **vidurkį** ir **medianą**, rūšiuoja st
 ### Konteinerio tipas – _vector_ ###
 |Įrašų kiekis | Failo nuskaitymas (s) | Rūšiavimas 1 strategija | Rūšiavimas 2 strategija | Rūšiavimas 3 strategija | Įrašymas į failus (s) | Bendra trukmė (s) |
 |-------------|-----------------------|-------------------------|-------------------------|-------------------------|-----------------------|-------------------|
-|       1 000	|                     - |                       - |                       - |                       - |                     - |             ≈0.03 |
+|       1 000	|                     - |                       - |                       - |                       - |                     - |             ≈0.01 |
 |      10 000 |                     - |                       - |                       - |                       - |                     - |             ≈0.06 |
-|     100 000 |                  0.26 |                    0.18 |                      96 |                    0.18 |                  0.08 |             ≈96.7 |
-|   1 000 000 |                   2.4 |                    2.16 |                      –- |                     .96 |                   0.7 |              ≈7.2 |
-|  10 000 000 |                  26.4 |                    28.7 |                      –- |                    24.9 |	                  7.9 |             ≈88.0 |
+|     100 000 |                  0.24 |                    0.19 |                      94 |                    0.18 |                  0.08 |              ≈0.5 |
+|   1 000 000 |                  2.31 |                    2.16 |                      –- |                    2.55 |                  0.66 |             ≈5.13 |
+|  10 000 000 |                 23.62 |                    34.7 |                      –- |                    31.2 |	                  7.1 |             ≈61.9 |
 
-> **Pastaba:**  
+> **Pastaba:**
+> - `Bendras (s)` naudoja sparčiausią rūšiavimo strategiją.
 > - `-` žymi labai mažą reikšmę  
 > - `--` žymi labai didelę reikšmę
 
 ### Konteinerio tipas – _list_ ###
 |Įrašų kiekis | Failo nuskaitymas (s) | Rūšiavimas 1 strategija | Rūšiavimas 2 strategija | Rūšiavimas 3 strategija | Įrašymas į failus (s) | Bendra trukmė (s) |
 | ----------- | --------------------- | ----------------------- | ----------------------- | ----------------------- | --------------------- | ----------------- |
-|       1 000 |                     - |                       - |                       - |                       - |  - | ≈0.03  |
-|      10 000 |                     - |                       - |                       - |                       - |                     - |             ≈0.07 |
-|     100 000 |                  0.34 |                    0.20 |                    0.08 |                    0.08 |                  0.07 |             ≈0.77 |
-|   1 000 000 |                  3.33 |                    2.23 |                    0.85 |                    0.85 |                   0.7 |             ≈7.96 |
-|  10 000 000 |                  34.8 |                     161 |                    38.2 |                    38.2 |                  12.5 |            ≈284.7 |
+|       1 000 |                     - |                       - |                       - |                       - |  -                    |            ≈0.05  |
+|      10 000 |                     - |                       - |                       - |                       - |                     - |             ≈0.09 |
+|     100 000 |                  0.33 |                    0.21 |                    0.09 |                    0.09 |                  0.07 |             ≈0.49 |
+|   1 000 000 |                   3.3 |                    2.28 |                    1.06 |                    1.06 |                  0.68 |             ≈5.04 |
+|  10 000 000 |                 37.44 |                      -- |                    38.8 |                    38.8 |                   9.8 |            ≈86.04 |
 
-> **Pastaba:**  
+> **Pastaba:**
+> - `Bendras (s)` naudoja sparčiausią rūšiavimo strategiją.
 > - `-` žymi labai mažą reikšmę  
 > - `--` žymi labai didelę reikšmę
 
 ### Išvados ###
 Naudojant `vector` konteinerį, optimaliausia taikyti rūšiavimui `3 strategiją`. Tuo tarpu `list` konteinerio atveju efektyviausios yra `2` ir `3 strategijos`.
-    
+
+## Palyginimo lentelė (struct ir class) ##
+|Įrašų kiekis | struct (vector) | struct (list) | class (vector) | class (list) | 
+| ----------- | --------------- | ------------- | -------------- | ------------ | 
+|       1 000 |            ≈0.03|         ≈0.03 |          ≈0.01|         ≈0.05|       
+|      10 000 |           ≈0.06 |         ≈0.07 |          ≈0.06|          ≈0.09|         
+|     100 000 |           ≈0.52 |         ≈0.49 |           ≈0.5|          ≈0.49|              
+|   1 000 000 |          ≈4.06  |         ≈4.88 |          ≈5.13|          ≈5.04|                
+|  10 000 000 |           ≈59.2 |         ≈85.5 |          ≈61.9|        ≈86.04|   
+
 ## Sistemos parametrai: ##
 
 - `CPU:`  Intel Core i5-1135G7 - 4 branduoliai / 8 gijų, 2.4 GHz
