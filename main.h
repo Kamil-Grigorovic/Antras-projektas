@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <chrono>
 #include <type_traits>
+#include <numeric>
 
 using namespace std;
 
