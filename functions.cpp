@@ -3,35 +3,36 @@
 // Funkcija studento ivedimui rankiniu budu
 template <typename T>
 Studentas<T> ivesk() {
-    Studentas<T> Laik;
-    cout << "Ivesk varda: "; 
-    getline(cin, Laik.vard);
-    cout << "Ivesk pavarde: "; 
-    getline(cin, Laik.pav);
-    cout << "Iveskite namu darbu pazymius po viena. Kai baigsite, tiesiog paspauskite ENTER:\n";
-    string temp;
-    Laik.paz.clear();
+    Studentas<T> s;
+    string input;
+    cout << "Iveskite varda: ";
+    getline(cin, input);
+    s.setVard(input);
+    cout << "Iveskite pavarde: ";
+    getline(cin, input);
+    s.setPav(input);
 
+    T paz;
+    cout << "Iveskite namu darbu pazymius po viena. Kai baigsite, paspauskite ENTER:\n";
     while (true) {
         cout << "Pazymys: ";
-        getline(cin, temp);
-        if (temp.empty()) break;
+        getline(cin, input);
+        if (input.empty()) break;
         try {
-            int paz = stoi(temp);
-            Laik.paz.push_back(paz);
+            int pazymys = stoi(input);
+            paz.push_back(pazymys);
         } catch (...) {
-            cout << "Klaida: iveskite skaiciu arba paspauskite ENTER, kad baigti.\n";
+            cout << "Klaida: iveskite skaiciu arba ENTER, kad baigti.\n";
         }
     }
-    if (Laik.paz.empty()) {
-        cout << "Studentas neturi namu darbu. Bus naudojamas 0.\n";
-        Laik.paz.push_back(0);
-    }
+    if (paz.empty()) paz.push_back(0);
+    s.setPaz(paz);
+
     while (true) {
         cout << "Iveskite egzamino bala: ";
-        getline(cin, temp);
+        getline(cin, input);
         try {
-            Laik.egzas = stoi(temp);
+            s.setEgzas(stoi(input));
             break;
         } catch (...) {
             cout << "Klaida: iveskite skaiciu!\n";
@@ -39,63 +40,59 @@ Studentas<T> ivesk() {
     }
 
     int sum = 0;
-    for (int p : Laik.paz) sum += p;
-    Laik.rez = Laik.egzas * 0.6 + (float)sum / Laik.paz.size() * 0.4;
-    Laik.mediana = skaiciuotiMediana(Laik.paz);
-    return Laik;
+    for (int p : paz) sum += p;
+    float rez = s.getEgzas() * 0.6f + (float)sum / paz.size() * 0.4f;
+    s.setRez(rez);
+    s.setMediana(skaiciuotiMediana(paz));
+
+    return s;
 }
 
 // Funkcija vienos eilutes skaitymui is failo
 template <typename T>
 Studentas<T> iveskIsFailo(const string &line) {
-    Studentas<T> Laik;
+    Studentas<T> s;
     istringstream in(line);
 
-    in >> Laik.vard >> Laik.pav;
+    string vard, pav;
+    in >> vard >> pav;
+    s.setVard(vard);
+    s.setPav(pav);
+
     T visiSkaiciai;
     string temp;
-    while (in >> temp) { 
+    while (in >> temp) {
         try {
-            size_t pos;
-            int skaicius = stoi(temp, &pos);
-            if (pos != temp.length()) {
-                throw std::invalid_argument("Ne skaicius");
-            }
+            int skaicius = stoi(temp);
             visiSkaiciai.push_back(skaicius);
-        } catch (...) {
-            cout << "Klaida faile: studento \"" << Laik.vard << " " << Laik.pav 
-                 << "\" pazymys \"" << temp << "\" yra netinkamas!" << endl;
-        }
+        } catch (...) {}
     }
 
     if (visiSkaiciai.empty()) {
-        cout << "Klaida: studentas \"" << Laik.vard << " " << Laik.pav 
-             << "\" neturi pazymiu." << endl;
-        Laik.egzas = 0;
-        Laik.rez = 0;
-        Laik.mediana = 0;
-        return Laik;
+        s.setEgzas(0);
+        s.setRez(0);
+        s.setMediana(0);
+        return s;
     }
 
-    Laik.egzas = visiSkaiciai.back();
+    s.setEgzas(visiSkaiciai.back());
     visiSkaiciai.pop_back();
-    Laik.paz = visiSkaiciai;
+    s.setPaz(visiSkaiciai);
 
     int sum = 0;
-    for (int p : Laik.paz) sum += p;
-    float vid = (Laik.paz.empty()) ? 0 : (float)sum / Laik.paz.size();
-    Laik.rez = Laik.egzas * 0.6 + vid * 0.4;
-    Laik.mediana = skaiciuotiMediana(Laik.paz);
+    for (int p : visiSkaiciai) sum += p;
+    float vid = (visiSkaiciai.empty()) ? 0 : (float)sum / visiSkaiciai.size();
+    s.setRez(s.getEgzas() * 0.6f + vid * 0.4f);
+    s.setMediana(skaiciuotiMediana(visiSkaiciai));
 
-    return Laik;
+    return s;
 }
 
 // Funkcija viso failo skaitymui
 template <typename T>
 T skaitytiIsFailo(const string &failoPavadinimas) {
     T studentai;
-
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = chrono::high_resolution_clock::now();
 
     ifstream failas(failoPavadinimas);
     if (!failas) {
@@ -104,23 +101,18 @@ T skaitytiIsFailo(const string &failoPavadinimas) {
     }
 
     string line;
-    if (!getline(failas, line)) {
-        cout << "Klaida: Failas tuscias"<< endl;
-        return studentai;
-    }
+    getline(failas, line); // praleidžiam antraštę
+
     using PazT = typename T::value_type::paz_type;
     while (getline(failas, line)) {
         if (!line.empty())
             studentai.push_back(iveskIsFailo<PazT>(line));
     }
+
     failas.close();
-
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = end - start;
-
-    cout << "Failo skaitymas uztruko " << elapsed.count() << " sekundziu." << endl;
-
-
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed = end - start;
+    cout << "Failo skaitymas uztruko " << elapsed.count() << " s.\n";
     return studentai;
 }
 
@@ -146,37 +138,32 @@ string formatuoti(string s, int plotis) {
 // Funkcija atsitiktinio studento generavimui
 template <typename T>
 Studentas<T> generuokStudenta() {
-    Studentas<T> Laik;
-    cout << "Ivesk varda: "; 
-    getline(cin, Laik.vard);
-    cout << "Ivesk pavarde: "; 
-    getline(cin, Laik.pav);
+    Studentas<T> s;
+    string vard, pav;
+    cout << "Iveskite varda: ";
+    getline(cin, vard);
+    cout << "Iveskite pavarde: ";
+    getline(cin, pav);
+    s.setVard(vard);
+    s.setPav(pav);
 
     int ndKiekis;
-    while (true) {
-        cout << "Kiek namu darbu pazymiu turi studentas? ";
-        string temp;
-        getline(cin, temp);
-        try {
-            ndKiekis = stoi(temp);
-            if (ndKiekis > 0) break;
-            else cout << "Turi buti bent vienas pazymys!\n";
-        } catch (...) {
-            cout << "Klaida: iveskite skaiciu!\n";
-        }
-    }
+    cout << "Kiek namu darbu pazymiu? ";
+    cin >> ndKiekis;
+    cin.ignore();
 
-    Laik.paz.clear();
-    for (int i = 0; i < ndKiekis; i++) {
-        Laik.paz.push_back(rand() % 10 + 1);
-    }
-    Laik.egzas = rand() % 10 + 1;
+    T paz;
+    for (int i = 0; i < ndKiekis; i++)
+        paz.push_back(rand() % 10 + 1);
+    s.setPaz(paz);
+    s.setEgzas(rand() % 10 + 1);
 
-    int sum = 0;
-    for (int p : Laik.paz) sum += p;
-    Laik.rez = Laik.egzas * 0.6f + (float)sum / Laik.paz.size() * 0.4f;
-    Laik.mediana = skaiciuotiMediana(Laik.paz);
-    return Laik;
+    int sum = accumulate(paz.begin(), paz.end(), 0);
+    float rez = s.getEgzas() * 0.6f + (float)sum / paz.size() * 0.4f;
+    s.setRez(rez);
+    s.setMediana(skaiciuotiMediana(paz));
+
+    return s;
 }
 
 // Rusiavimo funkcija
@@ -195,14 +182,14 @@ void rikiuotiIrSukurtGrupe(const T &visiStudentai, T &vargsiukai, T &galvociai, 
 
     auto comparator = [&](const auto &a, const auto &b) {
         if (kriterijus == "vardas") 
-            return a.vard < b.vard;
+            return a.getVard() < b.getVard();
         if (kriterijus == "pavarde") 
-            return a.pav < b.pav;
+            return a.getPav() < b.getPav();
         if (kriterijus == "vidurkis") 
-            return a.rez < b.rez;
-        if (a.pav == b.pav) 
-            return a.vard < b.vard;
-        return a.pav < b.pav;
+            return a.getRez() < b.getRez();
+        if (a.getPav() == b.getPav()) 
+            return a.getVard() < b.getVard();
+        return a.getVard() < b.getVard();
     };
 
     rikiuoti(temp, comparator);
@@ -211,7 +198,7 @@ void rikiuotiIrSukurtGrupe(const T &visiStudentai, T &vargsiukai, T &galvociai, 
     galvociai.clear();
 
     for (const auto &s : temp) {
-        if (s.rez < 5)
+        if (s.getRez() < 5)
             vargsiukai.push_back(s);
         else
             galvociai.push_back(s);
@@ -228,21 +215,21 @@ void rikiuotiIrSukurtGrupe_2(T &visiStudentai, T &vargsiukai, const string &krit
 
     auto comparator = [&](const auto &a, const auto &b) {
         if (kriterijus == "vardas") 
-            return a.vard < b.vard;
+            return a.getVard() < b.getVard();
         if (kriterijus == "pavarde") 
-            return a.pav < b.pav;
+            return a.getPav() < b.getPav();
         if (kriterijus == "vidurkis") 
-            return a.rez < b.rez;
-        if (a.pav == b.pav) 
-            return a.vard < b.vard;
-        return a.pav < b.pav;
+            return a.getRez() < b.getRez();
+        if (a.getPav() == b.getPav()) 
+            return a.getVard() < b.getVard();
+        return a.getVard() < b.getVard();
     };
 
     rikiuoti(visiStudentai, comparator);
 
     vargsiukai.clear();
     for (auto it = visiStudentai.begin(); it != visiStudentai.end(); ) {
-        if (it->rez < 5) {
+        if (it->getRez() < 5) {
             vargsiukai.push_back(*it);
             it = visiStudentai.erase(it);
         } else {
