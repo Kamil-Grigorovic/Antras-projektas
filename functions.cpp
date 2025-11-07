@@ -215,21 +215,21 @@ void rikiuotiIrSukurtGrupe_2(T &visiStudentai, T &vargsiukai, const string &krit
 
     auto comparator = [&](const auto &a, const auto &b) {
         if (kriterijus == "vardas") 
-            return a.vard < b.vard;
+            return a.getVard() < b.getVard();
         if (kriterijus == "pavarde") 
-            return a.pav < b.pav;
+            return a.getPav() < b.getPav();
         if (kriterijus == "vidurkis") 
-            return a.rez < b.rez;
-        if (a.pav == b.pav) 
-            return a.vard < b.vard;
-        return a.pav < b.pav;
+            return a.getRez() < b.getRez();
+        if (a.getPav() == b.getPav()) 
+            return a.getVard() < b.getVard();
+        return a.getVard() < b.getVard();
     };
 
     rikiuoti(visiStudentai, comparator);
 
     vargsiukai.clear();
     for (auto it = visiStudentai.begin(); it != visiStudentai.end(); ) {
-        if (it->rez < 5) {
+        if (it->getRez() < 5) {
             vargsiukai.push_back(*it);
             it = visiStudentai.erase(it);
         } else {
