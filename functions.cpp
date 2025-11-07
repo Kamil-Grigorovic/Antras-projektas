@@ -92,8 +92,7 @@ Studentas<T> iveskIsFailo(const string &line) {
 template <typename T>
 T skaitytiIsFailo(const string &failoPavadinimas) {
     T studentai;
-
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = chrono::high_resolution_clock::now();
 
     ifstream failas(failoPavadinimas);
     if (!failas) {
@@ -102,23 +101,18 @@ T skaitytiIsFailo(const string &failoPavadinimas) {
     }
 
     string line;
-    if (!getline(failas, line)) {
-        cout << "Klaida: Failas tuscias"<< endl;
-        return studentai;
-    }
+    getline(failas, line); // praleidžiam antraštę
+
     using PazT = typename T::value_type::paz_type;
     while (getline(failas, line)) {
         if (!line.empty())
             studentai.push_back(iveskIsFailo<PazT>(line));
     }
+
     failas.close();
-
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = end - start;
-
-    cout << "Failo skaitymas uztruko " << elapsed.count() << " sekundziu." << endl;
-
-
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed = end - start;
+    cout << "Failo skaitymas uztruko " << elapsed.count() << " s.\n";
     return studentai;
 }
 
