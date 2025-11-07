@@ -250,31 +250,32 @@ void rikiuotiIrSukurtGrupe_3(T &visiStudentai, T &vargsiukai, const string &krit
 
     auto comparator = [&](const auto &a, const auto &b) {
         if (kriterijus == "vardas") 
-            return a.vard < b.vard;
+            return a.getVard() < b.getVard();
         if (kriterijus == "pavarde") 
-            return a.pav < b.pav;
+            return a.getPav() < b.getPav();
         if (kriterijus == "vidurkis") 
-            return a.rez < b.rez;
-        if (a.pav == b.pav) 
-            return a.vard < b.vard;
-        return a.pav < b.pav;
+            return a.getRez() < b.getRez();
+        if (a.getPav() == b.getPav()) 
+            return a.getVard() < b.getVard();
+        return a.getVard() < b.getVard();
     };
+
     rikiuoti(visiStudentai, comparator);
 
     vargsiukai.clear();
 
     if constexpr (std::is_same_v<T, std::vector<typename T::value_type>>) {
         std::copy_if(visiStudentai.begin(), visiStudentai.end(), std::back_inserter(vargsiukai),
-                     [](const auto &s) { return s.rez < 5; });
+                     [](const auto &s) { return s.getRez() < 5; });
 
         visiStudentai.erase(
             std::remove_if(visiStudentai.begin(), visiStudentai.end(),
-                           [](const auto &s) { return s.rez < 5; }),
+                           [](const auto &s) { return s.getRez() < 5; }),
             visiStudentai.end());
 
     } else {
         for (auto it = visiStudentai.begin(); it != visiStudentai.end(); ) {
-            if (it->rez < 5) {
+            if (it->getRez() < 5) {
                 vargsiukai.push_back(*it);
                 it = visiStudentai.erase(it);
             } else {
