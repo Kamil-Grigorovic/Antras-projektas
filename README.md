@@ -57,6 +57,19 @@ Kodas skaičiuoja kiekvieno studento **vidurkį** ir **medianą**, rūšiuoja st
 ### Išvados ###
 Naudojant `vector` konteinerį, optimaliausia taikyti rūšiavimui `3 strategiją`. Tuo tarpu `list` konteinerio atveju efektyviausios yra `2` ir `3 strategijos`.
 
+### Kompiliatoriaus optimizavimo analizė (O1, O2, O3) ###
+Programai buvo atlikta eksperimentinė spartos analizė naudojant tris skirtingus kompiliatoriaus optimizavimo lygius:
+- O1
+- O2
+- O3
+
+Testavimas buvo atliktas su automatine įvestimi, naudojant 10 000 studentų duomenų failą
+|Optimizavimo lygis|	Vykdymo laikas (ms)|
+|------|--------|
+|O1|	204.497 ms|
+|O2|	203.2947 ms|
+|O3|	233.5941 ms|
+
 ## Palyginimo lentelė (struct ir class) ##
 |Įrašų kiekis | struct (vector) | struct (list) | class (vector) | class (list) | 
 | ----------- | --------------- | ------------- | -------------- | ------------ | 
