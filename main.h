@@ -30,6 +30,15 @@ public:
     Studentas(const string& v, const string& p, const T& paz, int e)
         : vard(v), pav(p), paz(paz), egzas(e) {}
 
+    ~Studentas() {
+        pav.clear();
+        vard.clear();
+        paz.clear();
+        egzas = 0;
+        rez = 0;
+        mediana = 0;
+    }
+
     string getVard() const { return vard; }
     string getPav() const { return pav; }
     T getPaz() const { return paz; }
