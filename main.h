@@ -44,6 +44,16 @@ public:
     //     mediana = 0;
     // }
 
+    // copy constructor
+    Studentas(const Studentas& other)
+        : vard(other.vard),
+          pav(other.pav),
+          paz(other.paz),
+          egzas(other.egzas),
+          rez(other.rez),
+          mediana(other.mediana)
+    {}
+
     string getVard() const { return vard; }
     string getPav() const { return pav; }
     T getPaz() const { return paz; }
