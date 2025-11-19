@@ -93,6 +93,11 @@ public:
         return os;
     }
 
+    // operator>> 
+    friend istream& operator>>(istream& is, Studentas<T>& s) {
+        is >> s.vard >> s.pav >> s.egzas;
+        return is;
+    }
 };
 
 // Funkciju deklaracijos
