@@ -26,9 +26,11 @@ private:
     float mediana;
 
 public:
+    // Konstruktoriai
     Studentas() : egzas(0), rez(0), mediana(0) {}
+
     Studentas(const string& v, const string& p, const T& paz, int e)
-        : vard(v), pav(p), paz(paz), egzas(e) {}
+        : vard(v), pav(p), paz(paz), egzas(e), rez(0), mediana(0) {}
 
     ~Studentas() {
         pav.clear();
