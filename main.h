@@ -69,6 +69,7 @@ public:
         return *this;
     }
 
+    // Getteriai
     string getVard() const { return vard; }
     string getPav() const { return pav; }
     T getPaz() const { return paz; }
@@ -76,9 +77,10 @@ public:
     float getRez() const { return rez; }
     float getMediana() const { return mediana; }
 
+    // Setteriai
     void setVard(const string& v) { vard = v; }
     void setPav(const string& p) { pav = p; }
-    void setPaz(const T& paz) { this->paz = paz; }
+    void setPaz(const T& p) { paz = p; }
     void setEgzas(int e) { egzas = e; }
     void setRez(float r) { rez = r; }
     void setMediana(float m) { mediana = m; }
