@@ -54,6 +54,21 @@ public:
           mediana(other.mediana)
     {}
 
+    // copy assignment operator
+    Studentas& operator=(const Studentas& other)
+    {
+        if (this == &other) return *this;
+
+        vard = other.vard;
+        pav = other.pav;
+        paz = other.paz;
+        egzas = other.egzas;
+        rez = other.rez;
+        mediana = other.mediana;
+
+        return *this;
+    }
+
     string getVard() const { return vard; }
     string getPav() const { return pav; }
     T getPaz() const { return paz; }
