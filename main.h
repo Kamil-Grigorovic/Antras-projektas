@@ -85,6 +85,14 @@ public:
     void setRez(float r) { rez = r; }
     void setMediana(float m) { mediana = m; }
 
+    // operator<<
+    friend ostream& operator<<(ostream& os, const Studentas<T>& s) {
+        os << s.vard << " " << s.pav
+           << " Rezultatas: " << s.rez
+           << " Mediana: " << s.mediana;
+        return os;
+    }
+
 };
 
 // Funkciju deklaracijos
