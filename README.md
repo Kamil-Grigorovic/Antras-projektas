@@ -1,3 +1,10 @@
+## Kas naujo ##
+Studentas klasė pilnai įgyvendina `„Rule of Three“` principą — realizuotas kopijavimo konstruktorius, kopijavimo priskyrimo operatorius ir destruktorius, užtikrinantys saugų ir teisingą objektų kopijavimą bei gyvavimo ciklo valdymą. Taip pat įgyvendinti perdengti įvesties `(operator>>)` ir išvesties `(operator<<)` operatoriai, kurie leidžia patogiai dirbti su Studentas objektais konsolėje ir failuose.
+
+![Rule Of Three](RuleOfThree.png)
+
+Prie programos meniu buvo pridėtas `Rule of Three` taisyklės testavimas, kuris aiškiai ir pilnai pademonstruoja jos veikimą.
+
 ## Studentų valdymo sistema ##
 | Failas | Tipas | Aprašymas |
 |---------|-------|-----------|
