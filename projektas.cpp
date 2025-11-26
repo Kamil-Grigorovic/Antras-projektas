@@ -36,8 +36,10 @@ int main() {
         // Keičiam originalą (naudojant operator>>) ir tikrinam, ar kopijos nepasikeičia
         cout << "Modifikuojame s1 (naudojant operator>>)" << endl;
         Studentas<vector<int>> s4;
-        cout << "Iveskite: vardas, pavarde, egzamino balas" << endl;
+        cout << "Iveskite: vardas, pavarde, pazymiai, egzamino balas" << endl;
         cin >> s4;
+
+        s1.setPav(s4.getPav());
         s1.setVard(s4.getVard());
 
         cout << "s1:\n" << s1 << endl;
