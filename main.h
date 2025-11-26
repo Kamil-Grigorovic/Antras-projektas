@@ -78,11 +78,8 @@ public:
     void setMediana(float m) { mediana = m; }
 
     friend ostream& operator<<(ostream& os, const Studentas<T>& s) {
-        os << s.vard << " " << s.pav
-           << " Rezultatas: " << s.rez
-           << " Mediana: " << s.mediana;
+        os << s.getVard() << " " << s.getPav() << " " << s.rez << " " << s.mediana;
         return os;
-    }
 
     friend istream& operator>>(istream& is, Studentas<T>& s) {
         is >> s.vard >> s.pav >> s.egzas;
@@ -114,5 +111,6 @@ void rikiuoti(Container &temp, Comparator comp);
 string formatuoti(string s, int plotis);
 
 string SkaiciaiSuKableliu(float value);
+
 
 
