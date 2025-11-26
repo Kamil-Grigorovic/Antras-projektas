@@ -42,8 +42,7 @@ public:
     // }
 
     Studentas(const Studentas& other)
-        : vard(other.vard),
-          pav(other.pav),
+        : Zmogus(other.getVard(), other.getPav()),
           paz(other.paz),
           egzas(other.egzas),
           rez(other.rez),
@@ -51,11 +50,11 @@ public:
     {}
 
     Studentas& operator=(const Studentas& other)
-    {
-        if (this == &other) return *this;
+    {   if (this == &other) return *this;
 
-        vard = other.vard;
-        pav = other.pav;
+        setVard(other.getVard());
+        setPav(other.getPav());
+
         paz = other.paz;
         egzas = other.egzas;
         rez = other.rez;
@@ -115,3 +114,4 @@ void rikiuoti(Container &temp, Comparator comp);
 string formatuoti(string s, int plotis);
 
 string SkaiciaiSuKableliu(float value);
+
