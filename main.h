@@ -82,7 +82,36 @@ public:
         return os;
 
     friend istream& operator>>(istream& is, Studentas<T>& s) {
-        is >> s.vard >> s.pav >> s.egzas;
+        string vard, pav;
+        if (!(is >> vard >> pav)) return is;
+
+        s.setVard(vard);
+        s.setPav(pav);
+
+        T paz;
+        int x;
+        vector<int> temp;
+
+        while (is >> x) temp.push_back(x);
+
+        is.clear();
+
+        if (temp.empty()) {
+            s.setPaz(T{});
+            s.setEgzas(0);
+            s.setRez(0);
+            s.setMediana(0);
+            return is;
+        }
+
+        int egzas = temp.back();
+        temp.pop_back();
+
+        for (int v : temp) paz.push_back(v);
+
+        s.setPaz(paz);
+        s.setEgzas(egzas);
+
         return is;
     }
 };
@@ -111,6 +140,7 @@ void rikiuoti(Container &temp, Comparator comp);
 string formatuoti(string s, int plotis);
 
 string SkaiciaiSuKableliu(float value);
+
 
 
 
