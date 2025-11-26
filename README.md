@@ -6,11 +6,15 @@ Ji turi:
  - getterius ir setterius
  - grynai virtualią funkciją `info()`, todėl Zmogus tampa *abstrakčia klase*
 
+![Rule Of Three](img/Zmogus.png)
+
 Klasė `Studentas` buvo pertvarkyta, kad paveldėtų iš `Zmogus`:
  - pašalinta perteklinė logika, dubliuojanti *vardą ir pavardę*
  - studento duomenys (*pažymiai, egzaminas, rezultatai*) išliko tik šioje klasėje
  - atnaujinti konstruktoriai, kopijavimo operatorius ir Rule of Three realizacija pagal paveldėjimą
  - pritaikyti operator>> ir operator<<, kad tinkamai dirbtų su paveldėtais laukais
+
+![Rule Of Three](img/Studentas.png)
 
 Pagerinta programos architektūra:
  - duomenų struktūra tapo aiškesnė
@@ -18,7 +22,8 @@ Pagerinta programos architektūra:
  - geresnis klasių atsakomybės paskirstymas
  - galimybė ateityje lengvai plėsti projektą (pvz., pridėti kitų tipų asmenų – dėstytojus ir pan.)
 
-## Studentų valdymo sistema ##
+
+# |*Studentų valdymo sistema*| #
 | Failas | Tipas | Aprašymas |
 |---------|-------|-----------|
 | `main.h` | Header | Klasės `Studentas` deklaracija|
@@ -39,7 +44,7 @@ Prie programos meniu buvo pridėtas `Rule of Three` taisyklės testavimas, kuris
 
 Studentas klasė pilnai įgyvendina `„Rule of Three“` principą — realizuotas kopijavimo konstruktorius, kopijavimo priskyrimo operatorius ir destruktorius, užtikrinantys saugų ir teisingą objektų kopijavimą bei gyvavimo ciklo valdymą. Taip pat įgyvendinti perdengti įvesties `(operator>>)` ir išvesties `(operator<<)` operatoriai, kurie leidžia patogiai dirbti su Studentas objektais konsolėje ir failuose.
 
-![Rule Of Three](RuleOfThree.png)
+![Rule Of Three](img/ruleofthree.png)
 
 ## Funkcijos: ##
  - **_ivesk()_** – įveda studentą rankiniu būdu.
