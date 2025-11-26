@@ -11,8 +11,11 @@ public:
     Zmogus(const string& v, const string& p) : vard(v), pav(p) {}
 
     virtual ~Zmogus() = default;
-    
+
+    string getVard() const { return vard; }
+    string getPav() const { return pav; }
     virtual void info() const = 0;
 }
+
 
 
