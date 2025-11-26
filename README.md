@@ -1,14 +1,28 @@
 ## Kas naujo ##
-Studentas klasė pilnai įgyvendina `„Rule of Three“` principą — realizuotas kopijavimo konstruktorius, kopijavimo priskyrimo operatorius ir destruktorius, užtikrinantys saugų ir teisingą objektų kopijavimą bei gyvavimo ciklo valdymą. Taip pat įgyvendinti perdengti įvesties `(operator>>)` ir išvesties `(operator<<)` operatoriai, kurie leidžia patogiai dirbti su Studentas objektais konsolėje ir failuose.
+Sukurta nauja `bazinė klasė Zmogus`, kurioje saugomi pagrindiniai asmens duomenys — *vardas ir pavardė*. 
 
-![Rule Of Three](RuleOfThree.png)
+Ji turi:
+ - konstruktorius ir destruktorių
+ - getterius ir setterius
+ - grynai virtualią funkciją `info()`, todėl Zmogus tampa *abstrakčia klase*
 
-Prie programos meniu buvo pridėtas `Rule of Three` taisyklės testavimas, kuris aiškiai ir pilnai pademonstruoja jos veikimą.
+Klasė `Studentas` buvo pertvarkyta, kad paveldėtų iš `Zmogus`:
+ - pašalinta perteklinė logika, dubliuojanti *vardą ir pavardę*
+ - studento duomenys (*pažymiai, egzaminas, rezultatai*) išliko tik šioje klasėje
+ - atnaujinti konstruktoriai, kopijavimo operatorius ir Rule of Three realizacija pagal paveldėjimą
+ - pritaikyti operator>> ir operator<<, kad tinkamai dirbtų su paveldėtais laukais
+
+Pagerinta programos architektūra:
+ - duomenų struktūra tapo aiškesnė
+ - kodas labiau OOP-orientuotas
+ - geresnis klasių atsakomybės paskirstymas
+ - galimybė ateityje lengvai plėsti projektą (pvz., pridėti kitų tipų asmenų – dėstytojus ir pan.)
 
 ## Studentų valdymo sistema ##
 | Failas | Tipas | Aprašymas |
 |---------|-------|-----------|
-| `main.h` | Header | Klasės `Studentas` deklaracija ir get/set metodai |
+| `main.h` | Header | Klasės `Studentas` deklaracija|
+| `base.h` | Header | Klasės `Zmogus` deklaracija|
 | `functions.cpp` | Source | Funkcijos, kurios įveda, skaito, generuoja ir rūšiuoja studentus |
 | `projektas.cpp` | Source | `main()` funkcija – programos valdymo meniu |
 
@@ -20,6 +34,12 @@ Programa skirta studentų duomenų tvarkymui:
  -  `galimybė pasirinkti, kokį konteinerio tipą naudoti.`
 
 Kodas skaičiuoja kiekvieno studento **vidurkį** ir **medianą**, rūšiuoja studentus pagal vartotojo pasirinktą kriterijų (**vardą, pavardę arba vidurkį**), padalija juos į dvi grupes (Galima pasirinkti vieną iš trijų rūšiavimo strategijų) – **vargsiukus** ir **galvočius** – ir išsaugo rezultatus į atskirus failus.
+
+Prie programos meniu buvo pridėtas `Rule of Three` taisyklės testavimas, kuris aiškiai ir pilnai pademonstruoja jos veikimą.
+
+Studentas klasė pilnai įgyvendina `„Rule of Three“` principą — realizuotas kopijavimo konstruktorius, kopijavimo priskyrimo operatorius ir destruktorius, užtikrinantys saugų ir teisingą objektų kopijavimą bei gyvavimo ciklo valdymą. Taip pat įgyvendinti perdengti įvesties `(operator>>)` ir išvesties `(operator<<)` operatoriai, kurie leidžia patogiai dirbti su Studentas objektais konsolėje ir failuose.
+
+![Rule Of Three](RuleOfThree.png)
 
 ## Funkcijos: ##
  - **_ivesk()_** – įveda studentą rankiniu būdu.
