@@ -19,8 +19,4 @@ public:
     void setPav(const string& p) { pav = p; }
 
     virtual void info() const = 0;
-}
-
-
-
-
+};
