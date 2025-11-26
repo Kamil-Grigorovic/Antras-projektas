@@ -7,6 +7,8 @@ private:
     string vard;
     string pav;
 public:
-
+    Zmogus() : vard(""), pav("") {}
+    Zmogus(const string& v, const string& p) : vard(v), pav(p) {}
     virtual void info() const = 0;
 }
+
