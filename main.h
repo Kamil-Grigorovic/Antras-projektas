@@ -63,15 +63,15 @@ public:
         return *this;
     }
 
-    string getVard() const { return vard; }
-    string getPav() const { return pav; }
+    void info() const override {
+        cout << getVard() << getPav() << endl;
+    }
+
     T getPaz() const { return paz; }
     int getEgzas() const { return egzas; }
     float getRez() const { return rez; }
     float getMediana() const { return mediana; }
 
-    void setVard(const string& v) { vard = v; }
-    void setPav(const string& p) { pav = p; }
     void setPaz(const T& p) { paz = p; }
     void setEgzas(int e) { egzas = e; }
     void setRez(float r) { rez = r; }
@@ -114,4 +114,5 @@ void rikiuoti(Container &temp, Comparator comp);
 string formatuoti(string s, int plotis);
 
 string SkaiciaiSuKableliu(float value);
+
 
