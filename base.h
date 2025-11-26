@@ -14,8 +14,13 @@ public:
 
     string getVard() const { return vard; }
     string getPav() const { return pav; }
+
+    void setVard(const string& v) { vard = v; }
+    void setPav(const string& p) { pav = p; }
+
     virtual void info() const = 0;
 }
+
 
 
 
