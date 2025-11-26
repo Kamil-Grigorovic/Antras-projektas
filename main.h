@@ -32,15 +32,6 @@ public:
 
     ~Studentas() = default;
 
-    // ~Studentas() {
-    //     vard.clear();
-    //     pav.clear();
-    //     paz.clear();
-    //     egzas = 0;
-    //     rez = 0;
-    //     mediana = 0;
-    // }
-
     Studentas(const Studentas& other)
         : Zmogus(other.getVard(), other.getPav()),
           paz(other.paz),
@@ -138,9 +129,4 @@ template <typename Container, typename Comparator>
 void rikiuoti(Container &temp, Comparator comp);
 
 string formatuoti(string s, int plotis);
-
 string SkaiciaiSuKableliu(float value);
-
-
-
-
