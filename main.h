@@ -9,6 +9,7 @@
 #include <chrono>
 #include <type_traits>
 #include <numeric>
+#include "base.h"
 
 using namespace std;
 
@@ -18,21 +19,17 @@ public:
     using paz_type = T;
 
 private:
-    string vard;
-    string pav;
     T paz;
     int egzas;
     float rez;
     float mediana;
 
 public:
-    // Konstruktoriai
-    Studentas() : egzas(0), rez(0), mediana(0) {}
+    Studentas() : Zmogus(), paz(), egzas(0), rez(0), mediana(0) {}
 
-    Studentas(const string& v, const string& p, const T& paz, int e)
-        : vard(v), pav(p), paz(paz), egzas(e), rez(0), mediana(0) {}
+    Studentas(const string& v, const string& p, const T& paz, int e) :
+        Zmogus(v, p), paz(paz), egzas(e), rez(0), mediana(0) {}
 
-    // Destruktorius
     ~Studentas() = default;
 
     // ~Studentas() {
@@ -44,7 +41,6 @@ public:
     //     mediana = 0;
     // }
 
-    // copy constructor
     Studentas(const Studentas& other)
         : vard(other.vard),
           pav(other.pav),
@@ -54,7 +50,6 @@ public:
           mediana(other.mediana)
     {}
 
-    // copy assignment operator
     Studentas& operator=(const Studentas& other)
     {
         if (this == &other) return *this;
@@ -69,7 +64,6 @@ public:
         return *this;
     }
 
-    // Getteriai
     string getVard() const { return vard; }
     string getPav() const { return pav; }
     T getPaz() const { return paz; }
@@ -77,7 +71,6 @@ public:
     float getRez() const { return rez; }
     float getMediana() const { return mediana; }
 
-    // Setteriai
     void setVard(const string& v) { vard = v; }
     void setPav(const string& p) { pav = p; }
     void setPaz(const T& p) { paz = p; }
@@ -85,7 +78,6 @@ public:
     void setRez(float r) { rez = r; }
     void setMediana(float m) { mediana = m; }
 
-    // operator<<
     friend ostream& operator<<(ostream& os, const Studentas<T>& s) {
         os << s.vard << " " << s.pav
            << " Rezultatas: " << s.rez
@@ -93,14 +85,12 @@ public:
         return os;
     }
 
-    // operator>> 
     friend istream& operator>>(istream& is, Studentas<T>& s) {
         is >> s.vard >> s.pav >> s.egzas;
         return is;
     }
 };
 
-// Funkciju deklaracijos
 template <typename T>
 Studentas<T> ivesk();
 template <typename T>
@@ -123,4 +113,5 @@ template <typename Container, typename Comparator>
 void rikiuoti(Container &temp, Comparator comp);
 
 string formatuoti(string s, int plotis);
+
 string SkaiciaiSuKableliu(float value);
