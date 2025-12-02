@@ -13,16 +13,27 @@
 
 using namespace std;
 
+/**
+ * @class Studentas
+ * @brief Šabloninė klasė, aprašanti studento duomenis.
+ * @tparam T Pažymių konteinerio tipas (pvz., std::vector<int>, std::list<int>).
+ *
+ * Klasė paveldi iš bazinės klasės Zmogus ir saugo papildomą informaciją:
+ * - namų darbų pažymius
+ * - egzamino rezultatą
+ * - galutinį balą (rezultatą)
+ * - medianą
+ */
 template <typename T>
-class Studentas {
+class Studentas : public Zmogus {
 public:
-    using paz_type = T;
+    using paz_type = T; ///< Pažymių konteinerio tipas
 
 private:
-    T paz;
-    int egzas;
-    float rez;
-    float mediana;
+    T paz; ///< Namų darbų pažymiai
+    int egzas; ///< Egzamino rezultatas
+    float rez; ///< Galutinis balas
+    float mediana; ///< Namų darbų pažymių mediana
 
 public:
     Studentas() : Zmogus(), paz(), egzas(0), rez(0), mediana(0) {}
@@ -130,3 +141,4 @@ void rikiuoti(Container &temp, Comparator comp);
 
 string formatuoti(string s, int plotis);
 string SkaiciaiSuKableliu(float value);
+
