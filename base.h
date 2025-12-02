@@ -35,12 +35,33 @@ public:
      */
     virtual ~Zmogus() = default;
 
+    /**
+     * @brief Grąžina žmogaus vardą.
+     * @return Vardas kaip string
+     */
     string getVard() const { return vard; }
+    /**
+     * @brief Grąžina žmogaus pavardę.
+     * @return Pavardė kaip string
+     */
     string getPav() const { return pav; }
 
+    /**
+     * @brief Nustato žmogaus vardą.
+     * @param v Naujas vardas
+     */
     void setVard(const string& v) { vard = v; }
+    /**
+     * @brief Nustato žmogaus pavardę.
+     * @param v Nauja pavardė
+     */
     void setPav(const string& p) { pav = p; }
 
+    /**
+     * @brief Virtuali funkcija informacijai išvesti.
+     *
+     * Turi būti perrašyta išvestinėse klasėse.
+     */
     virtual void info() const = 0;
 };
 
