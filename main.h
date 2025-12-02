@@ -36,11 +36,30 @@ private:
     float mediana; ///< Namų darbų pažymių mediana
 
 public:
+    /**
+     * @brief Numatytaisiais parametrais inicializuojantis konstruktorius.
+     * 
+     * Inicijuoja bazinę klasę Zmogus ir nustato numatytąsias reikšmes pažymiams, egzaminui, rezultatui ir medianai.
+     */
     Studentas() : Zmogus(), paz(), egzas(0), rez(0), mediana(0) {}
 
-    Studentas(const string& v, const string& p, const T& paz, int e) :
-        Zmogus(v, p), paz(paz), egzas(e), rez(0), mediana(0) {}
+    /**
+     * @brief Konstruktorius su visais studento duomenimis.
+     * @param v Vardas.
+     * @param p Pavardė.
+     * @param paz Namų darbų pažymiai.
+     * @param e Egzamino rezultatas.
+     * @details
+     * Inicijuoja bazinę klasę Zmogus su vardu ir pavarde. 
+     * Taip pat nustato pradinius pažymius ir egzamino rezultatą,
+     * o galutinio balo ir medianos reikšmės inicializuojamos į 0.
+     */
+    Studentas(const string& v, const string& p, const T& paz, int e)
+        : Zmogus(v, p), paz(paz), egzas(e), rez(0), mediana(0) {}
 
+    /**
+     * @brief Destruktorius.
+     */
     ~Studentas() = default;
 
     Studentas(const Studentas& other)
@@ -141,4 +160,5 @@ void rikiuoti(Container &temp, Comparator comp);
 
 string formatuoti(string s, int plotis);
 string SkaiciaiSuKableliu(float value);
+
 
