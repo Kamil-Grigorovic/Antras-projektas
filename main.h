@@ -165,10 +165,40 @@ public:
      */
     void setMediana(float m) { mediana = m; }
 
+    /**
+     * @brief operator<< perkrovimas.
+     * @param os Išvesties srautas (ostream), į kurį rašomi duomenys.
+     * @param s Studentas objektas, kurio informacija išvedama.
+     * @return Tas pats išvesties srautas po duomenų įrašymo
+     * 
+     * Formatas:
+     * @code
+     * Vardas Pavardė Rezultatas Mediana
+     * @endcode
+     */
     friend ostream& operator<<(ostream& os, const Studentas<T>& s) {
         os << s.getVard() << " " << s.getPav() << " " << s.rez << " " << s.mediana;
         return os;
+    }
 
+    /**
+     * @brief operator>> perkrovimas.
+     * @param is Įvesties srautas (istream), iš kurio skaitomi duomenys.
+     * @param s Studentas objektas, į kurį įrašomi nuskaityti duomenys.
+     * @return Tas pats įvesties srautas po duomenų nuskaitymo
+     * 
+     * Jeigu įvesties eilutėje nėra jokių pažymių, studentui priskiriami
+     * numatytieji 0 reikšmės (paz, egzas, rez, mediana).
+     * 
+     * Formatas:
+     * @code
+     * Vardas Pavardė Paz1 Paz2 Paz3... Egzaminas
+     * @endcode
+     * 
+     * @note
+     * Funkcija išvalo įvesties srauto klaidos būseną (`is.clear()`),
+     * kad būtų galima toliau naudoti srautą.
+     */
     friend istream& operator>>(istream& is, Studentas<T>& s) {
         string vard, pav;
         if (!(is >> vard >> pav)) return is;
@@ -227,6 +257,7 @@ void rikiuoti(Container &temp, Comparator comp);
 
 string formatuoti(string s, int plotis);
 string SkaiciaiSuKableliu(float value);
+
 
 
 
