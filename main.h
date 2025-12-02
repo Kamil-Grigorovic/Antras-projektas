@@ -62,6 +62,19 @@ public:
      */
     ~Studentas() = default;
 
+    /**
+     * @brief Copy Constructor.
+     * @param other Kitas Studentas objektas, iš kurio kopijuojami duomenys.
+     * @details
+     * Atliekamas gilus kopijavimas:
+     * - inicializuojama bazinė klasė Zmogus su tais pačiais vardu ir pavarde,
+     * - nukopijuojami namų darbų pažymiai,
+     * - egzamino balas,
+     * - galutinis balas,
+     * - ir mediana.
+     *
+     * Šis konstruktorius yra dalis *Rule of Three* realizacijos.
+     */
     Studentas(const Studentas& other)
         : Zmogus(other.getVard(), other.getPav()),
           paz(other.paz),
@@ -70,6 +83,23 @@ public:
           mediana(other.mediana)
     {}
 
+    /**
+     * @brief Copy Assignment Operator.
+     * @param other Kitas Studentas objektas, iš kurio kopijuojami duomenys.
+     * @return Nuoroda į šį objektą po priskyrimo.
+     * @details
+     * Atlieka pilną objekto lauko reikšmių kopijavimą, įskaitant:
+     * - paveldėtus laukus (vardą ir pavardę),
+     * - pažymių konteinerį,
+     * - egzamino balą,
+     * - galutinį balą,
+     * - medianą.
+     *
+     * Operatorius taip pat turi savikopijos (self-assignment) patikrą:
+     * jei `other` yra tas pats objektas, priskyrimas nevykdomas.
+     *
+     * Šis operatorius yra dalis *Rule of Three* realizacijos.
+     */
     Studentas& operator=(const Studentas& other)
     {   if (this == &other) return *this;
 
@@ -84,6 +114,11 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Išveda studento informaciją.
+     * 
+     * Perrašo bazinės klasės virtualią funkciją.
+     */
     void info() const override {
         cout << getVard() << getPav() << endl;
     }
@@ -160,5 +195,6 @@ void rikiuoti(Container &temp, Comparator comp);
 
 string formatuoti(string s, int plotis);
 string SkaiciaiSuKableliu(float value);
+
 
 
