@@ -234,31 +234,110 @@ public:
     }
 };
 
+/**
+ * @brief Funkcija studento duomenų įvedimui iš konsolės.
+ * @tparam T Pažymių konteinerio tipas.
+ * @return Sukurtas objektas.
+ */
 template <typename T>
 Studentas<T> ivesk();
+/**
+ * @brief Funkcija vienos eilutės skaitymui iš failo.
+ * @tparam T Pažymių konteinerio tipas.
+ * @param line Eilutė iš failo.
+ * @return Sukurtas objektas.
+ */
 template <typename T>
-Studentas<T> iveskIsFailo(const string &line);
+Studentas<T> iveskIsFailo(const string& line);
+/**
+ * @brief Funkcija medianos skaičiavimui.
+ * @tparam T Pažymių konteinerio tipas.
+ * @param pazymiai Pažymių konteineris.
+ * @return Mediana kaip float.
+ */
 template <typename T>
-float skaiciuotiMediana(const T &pazymiai);
+float skaiciuotiMediana(const T& pazymiai);
+/**
+ * @brief Funkcija viso failo skaitymui.
+ * @tparam T Pažymių konteinerio tipas.
+ * @param failoPavadinimas Failo pavadinimas.
+ * @return Konteineris su visais studentų objektais.
+ */
 template <typename T>
-T skaitytiIsFailo(const string &failoPavadinimas);
+T skaitytiIsFailo(const string& failoPavadinimas);
+/**
+ * @brief Funkcija atsitiktinio studento generavimui.
+ * @tparam T Pažymių konteinerio tipas.
+ * @return Studentas objektas.
+ */
 template <typename T>
 Studentas<T> generuokStudenta();
+/**
+ * @brief Funkcija studentų grupavimui ir rikiavimui pagal kriterijų.
+ * @tparam T Konteinerio tipas.
+ * @param visiStudentai Konteineris su visais studentais.
+ * @param vargsiukai Išvesties konteineris blogai besimokantiems studentams.
+ * @param galvociai Išvesties konteineris gerai besimokantiems studentams.
+ * @param kriterijus Kriterijus pagal kurį grupuojama.
+ * @details
+ * Funkcija grupuoja studentus pagal 1 strategiją.
+ */
 template <typename T>
-void rikiuotiIrSukurtGrupe(const T &visiStudentai, T &vargsiukai, T &galvociai, const string &kriterijus);
+void rikiuotiIrSukurtGrupe(const T& visiStudentai, T& vargsiukai, T& galvociai, const string& kriterijus);
+/**
+ * @brief Funkcija studentų grupavimui ir rikiavimui pagal kriterijų.
+ * @tparam T Konteinerio tipas.
+ * @param visiStudentai Konteineris su visais studentais.
+ * @param vargsiukai Išvesties konteineris blogai besimokantiems studentams.
+ * @param galvociai Išvesties konteineris gerai besimokantiems studentams.
+ * @param kriterijus Kriterijus pagal kurį grupuojama.
+ * @details
+ * Funkcija grupuoja studentus pagal 2 strategiją.
+ */
 template <typename T>
-void rikiuotiIrSukurtGrupe_2(T &visiStudentai, T &vargsiukai, const string &kriterijus);
+void rikiuotiIrSukurtGrupe_2(T& visiStudentai, T& vargsiukai, const string& kriterijus);
+/**
+ * @brief Funkcija studentų grupavimui ir rikiavimui pagal kriterijų.
+ * @tparam T Konteinerio tipas.
+ * @param visiStudentai Konteineris su visais studentais.
+ * @param vargsiukai Išvesties konteineris blogai besimokantiems studentams.
+ * @param galvociai Išvesties konteineris gerai besimokantiems studentams.
+ * @param kriterijus Kriterijus pagal kurį grupuojama.
+ * @details
+ * Funkcija grupuoja studentus pagal 3 strategiją.
+ */
 template <typename T>
-void rikiuotiIrSukurtGrupe_3(T &visiStudentai, T &vargsiukai, const string &kriterijus);
+void rikiuotiIrSukurtGrupe_3(T& visiStudentai, T& vargsiukai, const string& kriterijus);
+/**
+ * @brief Funkcija studentų duomenų spausdinimui į failą.
+ * @tparam T Konteinerio tipas.
+ * @param grupe Konteineris su studentais.
+ * @param failoVardas Išvesties failo pavadinimas.
+ */
 template <typename T>
-void spausdintiIFaila(const T &grupe, const string &failoVardas);
+void spausdintiIFaila(const T& grupe, const string& failoVardas);
+/**
+ * @brief Funkcija konteinerio rikiavimui pagal pateiktą komparatorių.
+ * @tparam Container KOnteinerio tipas.
+ * @tparam Comparator Komparatoriaus tipas.
+ * @param temp Rikiuojamas konteineris.
+ * @param comp Komparatorius rikiavimui.
+ * @details
+ * Funkcija automaatiškai aptinka ar konteineris yra std::list ar kitas ir atlieka atitinkamą rikiavimą.
+ */
 template <typename Container, typename Comparator>
-void rikiuoti(Container &temp, Comparator comp);
+void rikiuoti(Container& temp, Comparator comp);
 
+/**
+ * @brief Funkcija stringo formatavimui, kad jis būtų centruotas nurodytame plote.
+ * @param s Pradinis stringas.
+ * @param plotis Norimas plotis.
+ * @return Suformatuotas stringas.
+ */
 string formatuoti(string s, int plotis);
+/**
+ * @brief Funkcija skaičiaus suformatavimui su kableliu.
+ * @param value Skaičius kaip float.
+ * @return Suformatuotas stringas.
+ */
 string SkaiciaiSuKableliu(float value);
-
-
-
-
-
