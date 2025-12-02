@@ -123,14 +123,46 @@ public:
         cout << getVard() << getPav() << endl;
     }
 
+    /**
+     * @brief Gražina pažymių konteinerį.
+     * @return Pažymių konteineris.
+     */
     T getPaz() const { return paz; }
+    /**
+     * @brief Gražina egzamino balą.
+     * @return Egzamino balas kaip int.
+     */
     int getEgzas() const { return egzas; }
+    /**
+     * @brief Gražina galutinį balą.
+     * @return Galutinis balas kaip float.
+     */
     float getRez() const { return rez; }
+    /**
+     * @brief Gražina namų darbų pažymių medianą.
+     * @return Mediana kaip float.
+     */
     float getMediana() const { return mediana; }
 
+    /**
+     * @brief Nustato pažumių konteinerį.
+     * @param p Naujas pažymių konteineris.
+     */
     void setPaz(const T& p) { paz = p; }
+    /**
+     * @brief Nustato egzamino balą.
+     * @param e Naujas egzamino balas.
+     */
     void setEgzas(int e) { egzas = e; }
+    /**
+     * @brief Nustato galutinį balą.
+     * @param r Naujas galutinis balas.
+     */
     void setRez(float r) { rez = r; }
+    /**
+     * @brief Nustato namų darbų pažymių medianą.
+     * @param m Nauja mediana.
+     */
     void setMediana(float m) { mediana = m; }
 
     friend ostream& operator<<(ostream& os, const Studentas<T>& s) {
@@ -195,6 +227,7 @@ void rikiuoti(Container &temp, Comparator comp);
 
 string formatuoti(string s, int plotis);
 string SkaiciaiSuKableliu(float value);
+
 
 
 
