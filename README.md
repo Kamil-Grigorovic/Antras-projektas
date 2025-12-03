@@ -1,27 +1,27 @@
 ## Kas naujo ##
-Sukurta nauja `bazinė klasė Zmogus`, kurioje saugomi pagrindiniai asmens duomenys — *vardas ir pavardė*. 
+***Dokumentacija (Doxygen)***
 
-Ji turi:
- - konstruktorius ir destruktorių
- - getterius ir setterius
- - grynai virtualią funkciją `info()`, todėl Zmogus tampa *abstrakčia klase*
+Projektas turi pilnai sugeneruotą `Doxygen HTML dokumentaciją`, kurioje aprašytos:
+ - visos klasės (Zmogus, Studentas)
+ - visi metodai
+ - visi operatoriai
+ - visi templated funkcijų aprašymai
+ - programos architektūra ir ryšiai tarp klasių
 
-![Rule Of Three](img/Zmogus.png)
+Doxygen dokumentacija pateikta kataloge: `docs/`
 
-Klasė `Studentas` buvo pertvarkyta, kad paveldėtų iš `Zmogus`:
- - pašalinta perteklinė logika, dubliuojanti *vardą ir pavardę*
- - studento duomenys (*pažymiai, egzaminas, rezultatai*) išliko tik šioje klasėje
- - atnaujinti konstruktoriai, kopijavimo operatorius ir Rule of Three realizacija pagal paveldėjimą
- - pritaikyti operator>> ir operator<<, kad tinkamai dirbtų su paveldėtais laukais
+***Unit testai***
 
-![Rule Of Three](img/Studentas.png)
+Projektas papildytas `Unit testais`, kurie tikrina svarbiausią logiką:
+ - *Copy Constructor* veikimą
+ - *Copy Assignment Operator* veikimą
+ - *Operator<<* ir *operator>>* veikimą
+ - *Medianos* skaičiavimo funkciją
+ - Rikiavimo ir grupavimo* funkcijas (tiek su vector, tiek su list konteineriais)
 
-Pagerinta programos architektūra:
- - duomenų struktūra tapo aiškesnė
- - kodas labiau OOP-orientuotas
- - geresnis klasių atsakomybės paskirstymas
- - galimybė ateityje lengvai plėsti projektą (pvz., pridėti kitų tipų asmenų – dėstytojus ir pan.)
+Tam naudotas `Catch2 framework'as`.
 
+Testų failai yra kataloge: `tests/`
 
 # |*Studentų valdymo sistema*| #
 | Failas | Tipas | Aprašymas |
@@ -42,7 +42,46 @@ Kodas skaičiuoja kiekvieno studento **vidurkį** ir **medianą**, rūšiuoja st
 
 Prie programos meniu buvo pridėtas `Rule of Three` taisyklės testavimas, kuris aiškiai ir pilnai pademonstruoja jos veikimą.
 
-Studentas klasė pilnai įgyvendina `„Rule of Three“` principą — realizuotas kopijavimo konstruktorius, kopijavimo priskyrimo operatorius ir destruktorius, užtikrinantys saugų ir teisingą objektų kopijavimą bei gyvavimo ciklo valdymą. Taip pat įgyvendinti perdengti įvesties `(operator>>)` ir išvesties `(operator<<)` operatoriai, kurie leidžia patogiai dirbti su Studentas objektais konsolėje ir failuose.
+## Klasės ##
+Šiame projekte realizuotos dvi pagrindinės **OOP struktūros** — bazinė abstrakti klasė `Zmogus` ir iš jos paveldinti klasė `Studentas`.
+Struktūra sukurta pagal **gerąsias OOP praktikas**.
+
+Klasė `Zmogus – bazinė abstrakti klasė`
+
+Ji turi:
+ - *konstruktorius* ir *destruktorių*
+ - *getterius* ir *setterius*
+ - grynai *virtualią funkciją* `info()`, todėl `Zmogus` tampa *abstrakčia klase*
+
+Zmogus reprezentuoja bendrus visų asmenų duomenis.
+Ji yra sukurta kaip abstrakti klasė, todėl negali būti tiesiogiai kuriami jos objektai — ja naudojamasi tik kaip bazine klase.
+
+![Rule Of Three](img/Zmogus.png)
+
+Klasė `Studentas` – paveldi iš `Zmogus`
+
+`Studentas` išplečia `Zmogus` klasę ir prideda informaciją, būdingą tik studentams.
+
+Paveldėjimas:
+ - paveldi *vardą* ir *pavardę* iš `Zmogus`
+ - perrašo *virtualią funkciją info()*
+
+Papildomi studento duomenys:
+ - namų darbų pažymiai
+ - egzamino balas
+ - galutinis rezultatas (vidurkis arba mediana)
+ - galutinės mediana
+
+Realizuota:
+ - konstruktoriai pagal naują paveldėjimo logiką
+ - copy constructor
+ - copy assignment operator
+ - destruktorius
+ - įvesties `(operator>>)` ir išvesties `(operator<<)` operatoriai
+
+![Rule Of Three](img/Studentas.png)
+
+`Studentas` klasė pilnai įgyvendintas `„Rule of Three“` principas, užtikrinantys *saugų* ir *teisingą* objektų kopijavimą bei gyvavimo ciklo valdymą. Taip pat įgyvendinti perdengti *įvesties* ir *išvesties* operatoriai, kurie leidžia patogiai dirbti su `Studentas` objektais konsolėje ir failuose.
 
 ![Rule Of Three](img/ruleofthree.png)
 
