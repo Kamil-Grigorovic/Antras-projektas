@@ -30,3 +30,37 @@ TEST_CASE("Studento Copy Constructor") {
     CHECK(kopija.getPav() == "Kazlauskas");
     CHECK(originalas.getPav() == "Jonaitis");
 }
+
+// Studento Copy Assignment Operator testas
+TEST_CASE("Studento Copy Assignment Operator") {
+    Studentas<vector<int>> originalas("Jonas", "Jonaitis", {8, 9, 10}, 9);
+    originalas.setRez(9.0f);
+    originalas.setMediana(9.0f);
+
+    Studentas<vector<int>> priskyrimas;
+    priskyrimas = originalas;
+
+    // Tikrinam pirmine kopija
+    CHECK(priskyrimas.getVard() == originalas.getVard());
+    CHECK(priskyrimas.getPav() == originalas.getPav());
+    CHECK(priskyrimas.getPaz() == originalas.getPaz());
+    CHECK(priskyrimas.getRez() == originalas.getRez());
+    CHECK(priskyrimas.getMediana() == originalas.getMediana());
+
+    // Pakeiciam originala ir tikrinam, kad priskyrimas nesikeicia
+    originalas.setVard("Petras");
+
+    CHECK(originalas.getVard() == "Petras");
+    CHECK(priskyrimas.getVard() == "Jonas");
+
+    // Pakeiciam priskyrima ir tikrinam, kad originalas nesikeicia
+    priskyrimas.setPav("Kazlauskas");
+    
+    CHECK(priskyrimas.getPav() == "Kazlauskas");
+    CHECK(originalas.getPav() == "Jonaitis");
+
+    // Testuojam savikopija
+    priskyrimas = priskyrimas;
+    CHECK(priskyrimas.getVard() == "Jonas");
+    CHECK(priskyrimas.getPav() == "Kazlauskas");
+}
