@@ -64,3 +64,38 @@ TEST_CASE("Studento Copy Assignment Operator") {
     CHECK(priskyrimas.getVard() == "Jonas");
     CHECK(priskyrimas.getPav() == "Kazlauskas");
 }
+
+// Studento operatoriu testas
+TEST_CASE("Operatorius << isveda studento duomenis") {
+    Studentas<vector<int>> s("Jonas", "Jonaitis", {8, 9, 10}, 9);
+    s.setRez(9.0f);
+    s.setMediana(9.0f);
+
+    ostringstream out;
+    out << s;
+
+    string rezultatas = out.str();
+
+    // Tikrinam, ar išvestyje yra esminiai duomenys
+    CHECK(rezultatas.find("Jonas") != string::npos);
+    CHECK(rezultatas.find("Jonaitis") != string::npos);
+    CHECK(rezultatas.find("9") != string::npos);
+}
+
+TEST_CASE("Operatorius >> nuskaitydamas studento duomenis sukuria teisinga objekta") {
+    istringstream in("Jonas Jonaitis 8 9 10 9");
+    
+    Studentas<vector<int>> s;
+    in >> s;
+
+    CHECK(s.getVard() == "Jonas");
+    CHECK(s.getPav() == "Jonaitis");
+
+    auto paz = s.getPaz();
+    CHECK(paz.size() == 3);
+    CHECK(paz[0] == 8);
+    CHECK(paz[1] == 9);
+    CHECK(paz[2] == 10);
+
+    CHECK(s.getEgzas() == 9);
+}
