@@ -174,21 +174,22 @@ int main() {
                 getline(cin, strategija);
                 if (strategija == "1") {
                     rikiuotiIrSukurtGrupe(visiStudentai, vargsiukai, galvociai, kriterijus);
-                    spausdintiIFaila(vargsiukai, "vargsiukai_vector.txt");
-                    spausdintiIFaila(galvociai, "galvociai_vector.txt");
+                    spausdintiIFaila(vargsiukai, "vargsiukai_list.txt");
+                    spausdintiIFaila(galvociai, "galvociai_list.txt");
                 }
                 else if (strategija == "2") {
                     rikiuotiIrSukurtGrupe_2(visiStudentai, vargsiukai, kriterijus);
-                    spausdintiIFaila(vargsiukai, "vargsiukai_vector.txt");
-                    spausdintiIFaila(visiStudentai, "galvociai_vector.txt");
+                    spausdintiIFaila(vargsiukai, "vargsiukai_list.txt");
+                    spausdintiIFaila(visiStudentai, "galvociai_list.txt");
                 }
                 else if (strategija == "3") {
                     rikiuotiIrSukurtGrupe_3(visiStudentai, vargsiukai, kriterijus);
-                    spausdintiIFaila(vargsiukai, "vargsiukai_vector.txt");
-                    spausdintiIFaila(visiStudentai, "galvociai_vector.txt");
+                    spausdintiIFaila(vargsiukai, "vargsiukai_list.txt");
+                    spausdintiIFaila(visiStudentai, "galvociai_list.txt");
                 }
             }
         }
         return 0;
     }
 }
+
