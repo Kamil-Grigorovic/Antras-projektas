@@ -1,1 +1,32 @@
+// #define CATCH_CONFIG_MAIN
 
+#include "catch.hpp"
+#include "new_main.h"
+
+// Medianos skaiciavimo testai
+TEST_CASE("Medianos skaiciavimas") {
+    // Konteinerio tipas: vector
+    SECTION("Nelyginis pazymiu skaicius") {
+        vector<int> pazymiai = {4, 2, 9, 6, 5};
+        float mediana = skaiciuotiMediana(pazymiai);
+        REQUIRE(mediana == 5.0f);
+    }
+
+    SECTION("Lyginis pazymiu skaicius") {
+        vector<int> pazymiai = {4, 2, 9, 6};
+        float mediana = skaiciuotiMediana(pazymiai);
+        REQUIRE(mediana == 5.0f);
+    } 
+    // Konteinerio tipas: list
+        SECTION("Nelyginis pazymiu skaicius") {
+        list<int> pazymiai = {4, 2, 9, 6, 5};
+        float mediana = skaiciuotiMediana(pazymiai);
+        REQUIRE(mediana == 5.0f);
+    }
+
+    SECTION("Lyginis pazymiu skaicius") {
+        list<int> pazymiai = {2, 4, 3, 5};
+        float mediana = skaiciuotiMediana(pazymiai);
+        REQUIRE(mediana == 3.5f);
+    } 
+}
