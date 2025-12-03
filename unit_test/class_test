@@ -1,1 +1,32 @@
+#define CATCH_CONFIG_MAIN
 
+#include "catch.hpp"
+#include "new_main.h"
+
+// Studento Copy Constructor testas
+TEST_CASE("Studento Copy Constructor") {
+    Studentas<vector<int>> originalas("Jonas", "Jonaitis", {8, 9, 10}, 9);
+    originalas.setRez(9.0f);
+    originalas.setMediana(9.0f);
+
+    Studentas<vector<int>> kopija = originalas;
+
+    // Tikrinam pirmine kopija
+    CHECK(kopija.getVard() == originalas.getVard());
+    CHECK(kopija.getPav() == originalas.getPav());
+    CHECK(kopija.getRez() == originalas.getRez());
+    CHECK(kopija.getMediana() == originalas.getMediana());
+    CHECK(kopija.getPaz() == originalas.getPaz());
+
+    // Pakeiciam originala ir tikrinam, kad kopija nesikeicia
+    originalas.setVard("Petras");
+
+    CHECK(originalas.getVard() == "Petras");
+    CHECK(kopija.getVard() == "Jonas");
+
+    // Pakeiciam kopija ir tikrinam, kad originalas nesikeicia
+    kopija.setPav("Kazlauskas");
+
+    CHECK(kopija.getPav() == "Kazlauskas");
+    CHECK(originalas.getPav() == "Jonaitis");
+}
