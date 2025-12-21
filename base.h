@@ -3,14 +3,16 @@
 using namespace std;
 
 class Zmogus {
-private:
+protected:
     string vard;
     string pav;
 public:
-    Zmogus() : vard(""), pav("") {}
-    Zmogus(const string& v, const string& p) : vard(v), pav(p) {}
+    Zmogus(const string& v = "", const string& p = "") : vard(v), pav(p) {}
 
-    virtual ~Zmogus() = default;
+    virtual ~Zmogus() {
+        vard.clear();
+        pav.clear();
+    }
 
     string getVard() const { return vard; }
     string getPav() const { return pav; }
