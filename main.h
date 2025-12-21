@@ -14,7 +14,7 @@
 using namespace std;
 
 template <typename T>
-class Studentas {
+class Studentas : public Zmogus {
 public:
     using paz_type = T;
 
@@ -25,12 +25,17 @@ private:
     float mediana;
 
 public:
-    Studentas() : Zmogus(), paz(), egzas(0), rez(0), mediana(0) {}
+    Studentas() : paz(), egzas(0), rez(0), mediana(0) {}
 
-    Studentas(const string& v, const string& p, const T& paz, int e) :
-        Zmogus(v, p), paz(paz), egzas(e), rez(0), mediana(0) {}
+    Studentas(const string& v, const string& p, const T& paz, int e)
+        : Zmogus{v, p}, paz(paz), egzas(e), rez(0), mediana(0) {}
 
-    ~Studentas() = default;
+    ~Studentas() {
+        paz.clear();
+        egzas = 0;
+        rez = 0;
+        mediana = 0;
+    }
 
     Studentas(const Studentas& other)
         : Zmogus(other.getVard(), other.getPav()),
@@ -55,10 +60,15 @@ public:
     }
 
     void info() const override {
-        cout << getVard() << getPav() << endl;
+        cout << getVard() << " " << getPav() << " ";
+
+        for (int x : getPaz())
+            cout << x << " ";
+
+        cout << endl;
     }
 
-    T getPaz() const { return paz; }
+    const T& getPaz() const { return paz; }
     int getEgzas() const { return egzas; }
     float getRez() const { return rez; }
     float getMediana() const { return mediana; }
@@ -69,38 +79,40 @@ public:
     void setMediana(float m) { mediana = m; }
 
     friend ostream& operator<<(ostream& os, const Studentas<T>& s) {
-        os << s.getVard() << " " << s.getPav() << " " << s.rez << " " << s.mediana;
+        os << s.getVard() << " " << s.getPav() << " | ";
+        for (const auto& pazymys : s.getPaz()) {
+            os << " " << pazymys;
+        }
+        os << " | " << s.getEgzas() << " | " << s.getRez() << " " << s.getMediana();
         return os;
+    }
 
-    friend istream& operator>>(istream& is, Studentas<T>& s) {
+    friend istream& operator>>(istream& is, Studentas<T>& s)
+    {
         string vard, pav;
         if (!(is >> vard >> pav)) return is;
 
         s.setVard(vard);
         s.setPav(pav);
 
-        T paz;
+        T pazymiai;
         int x;
-        vector<int> temp;
 
-        while (is >> x) temp.push_back(x);
+        while (is >> x) {
+            pazymiai.push_back(x);
+    }
 
         is.clear();
-
-        if (temp.empty()) {
+    if (pazymiai.empty()) {
             s.setPaz(T{});
             s.setEgzas(0);
-            s.setRez(0);
-            s.setMediana(0);
             return is;
         }
+        auto it = std::prev(pazymiai.end());
+        int egzas = *it;
+        pazymiai.erase(it);
 
-        int egzas = temp.back();
-        temp.pop_back();
-
-        for (int v : temp) paz.push_back(v);
-
-        s.setPaz(paz);
+        s.setPaz(pazymiai);
         s.setEgzas(egzas);
 
         return is;
